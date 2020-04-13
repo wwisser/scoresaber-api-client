@@ -67,7 +67,7 @@ export class ScoreSaberApi {
         const response: IRestResponse<PagesReply> = await this.restClient.get<PagesReply>(`players/pages`);
 
         if (response.result === null) {
-            throw new Error(`Failed to pages (status=${response.statusCode})`);
+            throw new Error(`Failed fetch to pages (status=${response.statusCode})`);
         }
 
         return response.result;
