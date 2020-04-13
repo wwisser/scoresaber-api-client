@@ -1,11 +1,6 @@
-# ScoreSaber API Client
-https://new.scoresaber.com/api/
+import {ScoreSaberApi} from "./client";
+import {Player, PlayerInfo, Score, ScoreOrder, ScoreReply, ScoreStats} from "./representations";
 
-### Compile TypeScript
-``npx tsc``
-
-### Full Player Info
-```typescript
 const api: ScoreSaberApi = new ScoreSaberApi();
 
 api
@@ -14,22 +9,17 @@ api
         const playerInfo: PlayerInfo = player.playerInfo;
         const stats: ScoreStats = player.scoreStats;
 
-        // do something
+        // do something with your data
     })
     .catch(console.error);
 
-```
-
-### Top/Recent Scores
-```typescript
-const api: ScoreSaberApi = new ScoreSaberApi();
 
 api
     .getScores('76561198098563481', ScoreOrder.TOP, 1)
     .then((scoreReply: ScoreReply) => {
         const scores: Score[] = scoreReply.scores;
 
-        // do something
+        console.log(scores);
     })
     .catch(console.error);
-```
+
