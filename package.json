@@ -1,0 +1,23 @@
+{
+  "name": "scoresaber-api-client",
+  "version": "1.0.0",
+  "description": "https://new.scoresaber.com/api/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wwisser/scoresaber-api-client.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wwisser/scoresaber-api-client/issues"
+  },
+  "homepage": "https://github.com/wwisser/scoresaber-api-client#readme",
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  }
+}
