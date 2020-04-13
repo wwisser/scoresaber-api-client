@@ -17,7 +17,6 @@ api
         // do something
     })
     .catch(console.error);
-
 ```
 
 ### Top/Recent Scores

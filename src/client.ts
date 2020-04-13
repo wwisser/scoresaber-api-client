@@ -1,4 +1,4 @@
-import {Player, ScoreReply} from "./representations";
+import {Player, Score, ScoreReply} from "./representations";
 import {IRestResponse, RestClient} from "typed-rest-client/RestClient";
 
 export class ScoreSaberApi {
@@ -27,6 +27,29 @@ export class ScoreSaberApi {
         }
 
         return response.result;
+    }
+
+    public async getAllScores(id: string): Promise<ScoreReply> {
+        let scores: Score[] = [];
+        let offset = 1;
+        let wasLastResponseEmpty = false;
+
+        while (!wasLastResponseEmpty) {
+            await this.getScores(id, ScoreOrder.RECENT, offset++)
+                .then(scoreReply => {
+                    if (scoreReply.scores.length <= 0) {
+                        wasLastResponseEmpty = true;
+                        return;
+                    }
+
+                    scores.push(...scoreReply.scores);
+                })
+                .catch(console.error);
+        }
+
+        return {
+            scores
+        }
     }
 
     private static getPathByScoreOrder(order: ScoreOrder): string {
