@@ -1,4 +1,4 @@
-import {PagesReply, Player, Score, ScoreReply} from "./representations";
+import {PagesReply, PagifiedPlayer, Player, Score, ScoreReply} from "./representations";
 import {IRestResponse, RestClient} from "typed-rest-client/RestClient";
 
 export class ScoreSaberApi {
@@ -8,10 +8,20 @@ export class ScoreSaberApi {
     private readonly restClient: RestClient = new RestClient(null, ScoreSaberApi.HOST);
 
     public async getPlayer(id: string): Promise<Player> {
-        const response: IRestResponse<Player> = await this.restClient.get<Player>(`player/${id}/full/`);
+        const response: IRestResponse<Player> = await this.restClient.get<Player>(`player/${id}/full`);
 
         if (response.result === null) {
             throw new Error(`Failed to fetch player ${id} (status=${response.statusCode})`);
+        }
+
+        return response.result;
+    }
+
+    public async getPlayers(offset: number): Promise<PagifiedPlayer[]> {
+        const response: IRestResponse<PagifiedPlayer[]> = await this.restClient.get<PagifiedPlayer[]>(`players/${offset}`);
+
+        if (response.result === null) {
+            throw new Error(`Failed to fetch pagified players with offset=${offset} (status=${response.statusCode})`);
         }
 
         return response.result;

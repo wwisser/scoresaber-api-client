@@ -31,6 +31,21 @@ export interface Player {
     scoreStats: ScoreStats
 }
 
+
+export interface PagifiedPlayer {
+    playerid: number,
+    pp: number,
+    banned: number,
+    inactive: number,
+    name: string,
+    country: string,
+    role: string,
+    history: string,
+    rank: number,
+    difference: number,
+    avatar: string
+}
+
 export interface Score {
     scoreId: number,
     leaderboardId: number,
