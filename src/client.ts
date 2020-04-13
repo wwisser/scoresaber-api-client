@@ -1,14 +1,14 @@
-import {Player, Score, ScoreReply} from "./representations";
+import {PagesReply, Player, Score, ScoreReply} from "./representations";
 import {IRestResponse, RestClient} from "typed-rest-client/RestClient";
 
 export class ScoreSaberApi {
 
-    private static readonly HOST: string = 'https://new.scoresaber.com/api/player/';
+    private static readonly HOST: string = 'https://new.scoresaber.com/api/';
 
     private readonly restClient: RestClient = new RestClient(null, ScoreSaberApi.HOST);
 
     public async getPlayer(id: string): Promise<Player> {
-        const response: IRestResponse<Player> = await this.restClient.get<Player>(`${id}/full/`);
+        const response: IRestResponse<Player> = await this.restClient.get<Player>(`player/${id}/full/`);
 
         if (response.result === null) {
             throw new Error(`Failed to fetch player ${id} (status=${response.statusCode})`);
@@ -20,7 +20,8 @@ export class ScoreSaberApi {
     public async getScores(id: string, order: ScoreOrder, offset: number): Promise<ScoreReply> {
         const orderPath = ScoreSaberApi.getPathByScoreOrder(order);
 
-        const response: IRestResponse<ScoreReply> = await this.restClient.get<ScoreReply>(`${id}/scores/${orderPath}/${offset}`);
+        const response: IRestResponse<ScoreReply> = await this.restClient
+            .get<ScoreReply>(`player/${id}/scores/${orderPath}/${offset}`);
 
         if (response.result === null) {
             throw new Error(`Failed to fetch scores for ${id} (status=${response.statusCode})`);
@@ -50,6 +51,16 @@ export class ScoreSaberApi {
         return {
             scores
         }
+    }
+
+    public async getPlayerPages(): Promise<PagesReply> {
+        const response: IRestResponse<PagesReply> = await this.restClient.get<PagesReply>(`players/pages`);
+
+        if (response.result === null) {
+            throw new Error(`Failed to pages (status=${response.statusCode})`);
+        }
+
+        return response.result;
     }
 
     private static getPathByScoreOrder(order: ScoreOrder): string {

@@ -54,3 +54,7 @@ export interface Score {
 export interface ScoreReply {
     scores: Score[]
 }
+
+export interface PagesReply {
+    pages: number;
+}
