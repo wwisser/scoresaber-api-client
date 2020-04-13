@@ -19,5 +19,8 @@
   "homepage": "https://github.com/wwisser/scoresaber-api-client#readme",
   "devDependencies": {
     "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "typed-rest-client": "^1.7.3"
   }
 }
