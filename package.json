@@ -1,8 +1,8 @@
 {
   "name": "scoresaber-api-client",
   "version": "1.0.0",
-  "description": "https://new.scoresaber.com/api/",
-  "main": "index.js",
+  "description": "API client for https://new.scoresaber.com/api/",
+  "main": "src/client.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,5 +22,6 @@
   },
   "dependencies": {
     "typed-rest-client": "^1.7.3"
-  }
+  },
+  "types": "src/representations.d.ts"
 }
